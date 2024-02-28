@@ -22,6 +22,7 @@ def connect_db():
 class Task(BaseModel):
     task: str
 
+
 # ----------------- API Endpoints ----------------- #
     
 # Endpoint to get all the tasks
