@@ -1,11 +1,21 @@
 # Importing the required libraries
 import fastapi
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import mysql.connector
 from pydantic import BaseModel
 
 # Creating the API app from FastAPI
 app = fastapi.FastAPI()
+
+# Adding the CORS middleware to the API app
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Function to connect to the database
 def connect_db():
@@ -34,9 +44,11 @@ def read_root():
         # Get all the tasks from the database
         cursor.execute("SELECT * FROM tasks")
         # Fetching the results
-        tables = cursor.fetchall()
+        tasks = cursor.fetchall()
+        # Converting the results into a list
+        tasks_list = [task for task in tasks]
         # Returning the results
-        return {"tasks": tables}
+        return tasks_list
     except:
         # If there is an error, return an error message
         raise fastapi.HTTPException(status_code=400, detail="ERROR")
@@ -51,8 +63,10 @@ def create_task(task: Task):
         cursor.execute(f"INSERT INTO tasks (task) VALUES ('{task.task}')")
         # Committing the changes
         db.commit()
-        # Returning the success message
-        return {"status:": "success"}
+        # Getting the ID of the newly created task
+        task_id = cursor.lastrowid
+        # Returning the ID
+        return {"id": task_id}
     except:
         # If there is an error, return an error message
         raise fastapi.HTTPException(status_code=400, detail="ERROR")
