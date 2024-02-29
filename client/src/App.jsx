@@ -6,7 +6,7 @@ function App() {
   const [newTask, setNewTask] = useState('')  
   const [gotNewTask, setGotNewTask] = useState(false)
   
-  baseURL = 'http://' // Add your server's IP address or domain here
+  const baseURL = 'http://localhost:8001/' // Add your server's IP address or domain here
 
   useEffect(() => {
     axios.get(baseURL + 'tasks/').then((res) => {
