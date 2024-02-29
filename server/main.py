@@ -9,6 +9,8 @@ import os
 
 # Get the db password
 load_dotenv()
+DB_HOST = os.getenv("DB_HOST")
+DB_USERNAME = os.getenv("DB_USERNAME")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 # Creating the API app from FastAPI
@@ -26,8 +28,8 @@ app.add_middleware(
 # Function to connect to the database
 def connect_db():
     db = mysql.connector.connect(
-        host="45.147.7.81",
-        user="croco",
+        host=DB_HOST,
+        user=DB_USERNAME,
         password=DB_PASSWORD,
         database="ez_tasklist"
     )

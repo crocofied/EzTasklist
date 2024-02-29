@@ -6,8 +6,10 @@ function App() {
   const [newTask, setNewTask] = useState('')  
   const [gotNewTask, setGotNewTask] = useState(false)
   
+  baseURL = 'http://' // Add your server's IP address or domain here
+
   useEffect(() => {
-    axios.get('http://localhost:8001/tasks/').then((res) => {
+    axios.get(baseURL + 'tasks/').then((res) => {
       setTasks(res.data)
       console.log(res.data)
     })
@@ -15,14 +17,14 @@ function App() {
 
   const addTask = () => {
     if (newTask !== '') {
-      axios.post('http://localhost:8001/tasks/create/', {task: newTask}).then((res) => {
+      axios.post(baseURL + 'tasks/create/', {task: newTask}).then((res) => {
         setTasks([...tasks, [res.data.id, newTask]])
         setGotNewTask(!gotNewTask)
       })
     }
   }
   const deleteTask = (id) => {
-    axios.delete('http://localhost:8001/tasks/delete/?task_id=' + id).then((res) => {
+    axios.delete(baseURL + 'tasks/delete/?task_id=' + id).then((res) => {
       setGotNewTask(!gotNewTask)
     })
   }
@@ -50,7 +52,6 @@ function App() {
                   </div>
                 ))
               : <div className='text-center text-gray-200'>No tasks available</div>
-              }
             }   
           </div>
         </div>
