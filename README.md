@@ -40,7 +40,7 @@ pip install -r requirements.txt
 ```
 7. Rename the .example-env to .env and insert your MySQL data there
 8. Create a new MySQL Database called "ez_tasklist"
-9. Inside there create a new table called "tasks. There should be the Values id(int, AUTO_INCREMENT) and task(LONGTEXT)
+9. Inside there create a new table called "tasks". There should be the Values id(int, AUTO_INCREMENT) and task(LONGTEXT)
 
 
 To start the application:
