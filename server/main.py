@@ -4,6 +4,12 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import mysql.connector
 from pydantic import BaseModel
+from dotenv import load_dotenv
+import os
+
+# Get the db password
+load_dotenv()
+DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 # Creating the API app from FastAPI
 app = fastapi.FastAPI()
@@ -22,7 +28,7 @@ def connect_db():
     db = mysql.connector.connect(
         host="45.147.7.81",
         user="croco",
-        password="amesadssadsD8.",
+        password=DB_PASSWORD,
         database="ez_tasklist"
     )
     cursor = db.cursor()
