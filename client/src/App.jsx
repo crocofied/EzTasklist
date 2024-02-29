@@ -6,7 +6,7 @@ function App() {
   const [newTask, setNewTask] = useState('')  
   const [gotNewTask, setGotNewTask] = useState(false)
   
-  baseURL = 'http://localhost:8001/' // Add your server's IP address or domain here
+  const baseURL = 'http://localhost:8001/' // Add your server's IP address or domain here
 
   useEffect(() => {
     axios.get(baseURL + 'tasks/').then((res) => {
@@ -46,7 +46,7 @@ function App() {
             {
               tasks.length > 0?
                 tasks.map((task, id) => (
-                  <div className='flex bg-slate-700 m-2 p-3  items-center text-lg'>
+                  <div className='flex bg-slate-700 m-2 p-3  items-center text-lg overflow-auto'>
                     <input id="checked-checkbox" onChange={() => deleteTask(task[0])} value={task[0]} type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
                     <p className='ml-2 text-gray-200'>{task[1]}</p>
                   </div>
