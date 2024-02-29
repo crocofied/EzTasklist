@@ -21,6 +21,11 @@ function App() {
       })
     }
   }
+  const deleteTask = (id) => {
+    axios.delete('http://localhost:8001/tasks/delete/?task_id=' + id).then((res) => {
+      setGotNewTask(!gotNewTask)
+    })
+  }
 
 
   return (
@@ -36,12 +41,17 @@ function App() {
             
             <hr className='h-px my-4 bg-black dark:bg-gray-400 border-0'></hr>
             
-            {tasks.map((task, id) => (
-              <div className='flex bg-slate-700 m-2 p-3  items-center text-lg'>
-                <input id="checked-checkbox" value={task[0]} type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-                <p className='ml-2 text-gray-200'>{task[1]}</p>
-              </div>
-            ))}   
+            {
+              tasks.length > 0?
+                tasks.map((task, id) => (
+                  <div className='flex bg-slate-700 m-2 p-3  items-center text-lg'>
+                    <input id="checked-checkbox" onChange={() => deleteTask(task[0])} value={task[0]} type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                    <p className='ml-2 text-gray-200'>{task[1]}</p>
+                  </div>
+                ))
+              : <div className='text-center text-gray-200'>No tasks available</div>
+              }
+            }   
           </div>
         </div>
       </div>
