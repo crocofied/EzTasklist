@@ -18,9 +18,6 @@ More features are comming soon.
 **Server:** FastAPI (Python)
 
 ## Demo
-LIVE DEMO: https://croco-dev.xyz/tasklist/
--> Please note that this is only a preview. All data will be deleted from the database every 2 minutes.
-
 Preview:<br />
 ![demo](https://i.ibb.co/YLR8Whn/Screenshot-2024-02-29-200309.png) <br />
 
